@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Teresa Castro Portfolio</title>
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a dictionary entry for a person. The hero is the headword, the
+   work section is a case-study browser (one project on screen at a time), and
+   everything else is a short, scannable reference block. */
+:root{
+  --paper:#f2f5f1;
+  --sheet:#fbfcfa;
+  --ink:#13201b;
+  --muted:#55655e;
+  --rule:#cfd8d2;
+  --accent:#0b6b57;
+  --on-accent:#f2f5f1;
+  --mark:#e3ef5a;
+  --mark-ink:#13201b;
+  --tab-n:var(--mark);
+  --display:"Instrument Serif","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --body:"Hanken Grotesk","Segoe UI",system-ui,-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --radius:10px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0e1513;--sheet:#151f1c;--ink:#e7eeea;--muted:#9aaba3;--rule:#2b3833;
+    --accent:#62d2b3;--on-accent:#0e1513;--mark:#cfdc4a;--mark-ink:#0e1513;--tab-n:#0b6b57;color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0e1513;--sheet:#151f1c;--ink:#e7eeea;--muted:#9aaba3;--rule:#2b3833;
+  --accent:#62d2b3;--on-accent:#0e1513;--mark:#cfdc4a;--mark-ink:#0e1513;--tab-n:#0b6b57;color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-underline-offset:.18em;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+h1,h2,h3,h4{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0;line-height:1.05}
+p{margin:0}
+img{max-width:100%}
+.wrap{max-width:74rem;margin:0 auto;padding:0 clamp(1rem,4vw,2.5rem)}
+.label{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+mark{background:var(--mark);color:var(--mark-ink);padding:.05em .25em;border-radius:3px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:.5rem;font:600 .95rem/1 var(--body);padding:.8rem 1.15rem;border-radius:999px;text-decoration:none;border:1px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer;transition:background .15s,color .15s,border-color .15s,transform .15s}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn:active{transform:translateY(1px)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--rule)}
+.btn.ghost:hover{border-color:var(--ink);background:transparent;color:var(--ink)}
+.btn[disabled]{opacity:.35;cursor:default;pointer-events:none}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:3.6rem}
+.nav .name{font-family:var(--display);font-size:1.45rem;color:var(--ink);text-decoration:none;white-space:nowrap}
+.nav ul{display:flex;gap:.25rem;list-style:none;margin:0;padding:0}
+.nav ul a{display:block;font-size:.92rem;font-weight:500;color:var(--muted);text-decoration:none;padding:.4rem .8rem;border-radius:999px;transition:color .15s,background .15s}
+.nav ul a:hover{color:var(--ink)}
+.nav ul a[aria-current="true"]{color:var(--ink);background:var(--sheet);box-shadow:inset 0 0 0 1px var(--rule)}
+.nav .btn{padding:.6rem 1rem;font-size:.88rem}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:var(--accent);transform:scaleX(0);transform-origin:left}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(1.5rem,4vw,3.5rem);align-items:end;padding-top:clamp(2.5rem,6vw,5rem);padding-bottom:clamp(2rem,4vw,3rem)}
+.headword{font-size:clamp(3.4rem,11vw,8.2rem);letter-spacing:-.02em;line-height:.9;margin-top:.8rem}
+.headword em{font-style:italic;color:var(--accent)}
+.pron{display:flex;flex-wrap:wrap;gap:.3rem 1rem;align-items:baseline;margin-top:1rem;font-family:var(--mono);font-size:.88rem;color:var(--muted)}
+.pron .pos{font-family:var(--display);font-style:italic;font-size:1.25rem;color:var(--ink)}
+.senses{list-style:none;margin:1.8rem 0 0;padding:0;display:grid;gap:.9rem;max-width:40rem;counter-reset:sense}
+.senses li{display:grid;grid-template-columns:1.8rem 1fr;gap:.4rem;counter-increment:sense;font-size:clamp(1.08rem,1.8vw,1.25rem);line-height:1.45}
+.senses li::before{content:counter(sense) ".";font-family:var(--mono);font-size:.85rem;color:var(--accent);padding-top:.35em}
+.senses li:only-child{grid-template-columns:1fr}
+.senses li:only-child::before{display:none}
+.cta{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
+.card{background:var(--sheet);border:1px solid var(--rule);border-radius:var(--radius);padding:1.4rem}
+.glancecard dl{margin:.9rem 0 0;display:grid}
+.glancecard dl div{display:grid;grid-template-columns:6.5rem 1fr;gap:.75rem;padding:.7rem 0;border-top:1px solid var(--rule);font-size:.95rem}
+.glancecard dt{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:.2em}
+.glancecard dd{margin:0}
+.status{display:inline-flex;align-items:center;gap:.5rem;font-weight:600;font-size:.95rem}
+.status i{width:.6rem;height:.6rem;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 22%,transparent)}
+.figures{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:var(--radius);overflow:hidden;margin-bottom:clamp(2.5rem,6vw,4.5rem)}
+.figures div{background:var(--sheet);padding:1.2rem 1.25rem 1.3rem}
+.figures b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(2.2rem,4.6vw,3.3rem);line-height:1;font-variant-numeric:tabular-nums}
+.figures span{display:block;margin-top:.45rem;font-size:.88rem;line-height:1.4;color:var(--muted)}
+
+/* sections */
+section{padding:clamp(3rem,7vw,5.5rem) 0;border-top:1px solid var(--rule)}
+.sec-head{display:grid;gap:.6rem;margin-bottom:clamp(1.5rem,4vw,2.5rem);max-width:46rem}
+.sec-head h2{font-size:clamp(2.2rem,5vw,3.5rem)}
+.sec-head p{color:var(--muted)}
+
+/* case-study browser */
+.tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.6rem;margin-bottom:1rem}
+.tab{display:grid;gap:.35rem;align-content:start;text-align:left;text-decoration:none;color:var(--ink);background:var(--sheet);border:1px solid var(--rule);border-radius:var(--radius);padding:.9rem 1rem 1rem;transition:border-color .15s,background .15s,color .15s,transform .15s}
+.tab:hover{border-color:var(--ink);transform:translateY(-2px)}
+.tab .n{font-family:var(--mono);font-size:.72rem;color:var(--accent)}
+.tab .t{font-family:var(--display);font-size:1.3rem;line-height:1.1}
+.tab .r{font-size:.82rem;color:var(--muted);line-height:1.35}
+.tab[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.tab[aria-selected="true"] .n{color:var(--tab-n)}
+.tab[aria-selected="true"] .r{color:color-mix(in srgb,var(--paper) 72%,transparent)}
+.js .tab[aria-selected="true"]:hover{transform:none}
+html:not(.js) .tabs{display:none}
+
+.panel{background:var(--sheet);border:1px solid var(--rule);border-radius:calc(var(--radius) + 4px);padding:clamp(1.25rem,3.5vw,2.5rem);margin-bottom:1rem}
+.js .panel[hidden]{display:none}
+.js .panel:not([hidden]){animation:rise .35s ease-out}
+@keyframes rise{from{opacity:.4;transform:translateY(8px)}to{opacity:1;transform:none}}
+.p-top{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(1.25rem,3vw,2.5rem);align-items:stretch}
+.p-top h3{font-size:clamp(1.9rem,3.8vw,2.9rem);margin-top:.6rem}
+.p-top h3 i{color:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;list-style:none;margin:1.1rem 0 0;padding:0}
+.chips li{font-family:var(--mono);font-size:.72rem;letter-spacing:.03em;border:1px solid var(--rule);background:var(--paper);padding:.3rem .6rem;border-radius:999px}
+.chips li.hit{background:var(--mark);color:var(--mark-ink);border-color:var(--mark)}
+.kpi{display:grid;align-content:end;gap:.5rem;background:var(--accent);color:var(--on-accent);border-radius:var(--radius);padding:1.4rem;min-height:11rem}
+.kpi .label{color:inherit;opacity:.8}
+.kpi b{font-family:var(--display);font-weight:400;font-size:clamp(3rem,6.5vw,4.6rem);line-height:.95;font-variant-numeric:tabular-nums}
+.kpi span{font-size:.95rem;line-height:1.4}
+.p-main{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(1.25rem,3vw,2.5rem);margin-top:clamp(1.5rem,3.5vw,2.5rem);padding-top:clamp(1.5rem,3.5vw,2.5rem);border-top:1px solid var(--rule)}
+.steps{list-style:none;margin:0;padding:0;display:grid;counter-reset:step}
+.steps li{position:relative;display:grid;gap:.3rem;padding:0 0 1.6rem 3rem;counter-increment:step}
+.steps li:last-child{padding-bottom:0}
+.steps li::before{content:counter(step);position:absolute;left:0;top:0;width:1.9rem;height:1.9rem;display:grid;place-items:center;border-radius:50%;border:1px solid var(--accent);color:var(--accent);background:var(--sheet);font-family:var(--mono);font-size:.8rem;z-index:1}
+.steps li::after{content:"";position:absolute;left:.95rem;top:1.9rem;bottom:0;width:1px;background:var(--rule)}
+.steps li:last-child::after{display:none}
+.steps h4{font-size:1.5rem;font-style:italic;line-height:1.25}
+.steps p{max-width:62ch}
+.aside{display:grid;gap:.9rem;align-content:start;font-size:.95rem}
+.aside > div{display:grid;gap:.3rem}
+.aside p{color:var(--muted)}
+.aside .ink{color:var(--ink)}
+.aside small{color:var(--muted);font-size:.82rem}
+.story{display:grid;gap:1.5rem;align-content:start}
+.outcome{border-left:2px solid var(--accent);padding-left:1.1rem;display:grid;gap:.3rem}
+.outcome h4{font-size:1.5rem;font-style:italic;line-height:1.25}
+.outcome p{max-width:62ch}
+.fold{border-top:1px solid var(--rule)}
+.fold>summary{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.75rem 0;cursor:pointer;list-style:none;font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.fold>summary::-webkit-details-marker{display:none}
+.fold>summary::after{content:"+";font-size:1.25rem;line-height:1;color:var(--accent)}
+.fold[open]>summary::after{content:"\2212"}
+.fold>summary:hover,.fold[open]>summary{color:var(--ink)}
+.fold-body{display:grid;gap:.5rem;padding:0 0 1rem}
+.fold.big{border-bottom:1px solid var(--rule)}
+.fold.big>summary{font:600 1rem/1.3 var(--body);letter-spacing:0;text-transform:none;color:var(--ink);padding:1rem 0}
+.fold.big .fold-body{padding:.5rem 0 1.25rem}
+.visual{margin:clamp(1.5rem,3.5vw,2.5rem) 0 0;padding:1.25rem;background:var(--paper);border:1px solid var(--rule);border-radius:var(--radius)}
+.visual .scroll{overflow-x:auto}
+.visual svg{display:block;min-width:34rem;width:100%;height:auto}
+.visual figcaption{margin-top:.9rem;font-size:.85rem;color:var(--muted);max-width:62ch}
+.ladder{display:grid;gap:.9rem}
+.ladder .row{display:grid;grid-template-columns:10rem 1fr;gap:1rem;align-items:center}
+.ladder .lv{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.5rem}
+.ladder .lv span{font-family:var(--mono);font-size:.9rem;text-align:center;padding:.7rem 0;border-radius:6px;border:1px solid var(--accent);color:var(--accent)}
+.ladder .lv span.y17{background:var(--accent);color:var(--on-accent)}
+.ladder .lv span.none{border-style:dashed;border-color:var(--rule);color:transparent}
+.legend{display:flex;flex-wrap:wrap;gap:.4rem 1.25rem;font-size:.85rem;color:var(--muted)}
+.legend i{display:inline-block;width:.8rem;height:.8rem;border-radius:3px;border:1px solid var(--accent);margin-right:.4rem;vertical-align:-.08em}
+.legend i.y17{background:var(--accent)}
+.p-foot{display:flex;justify-content:space-between;gap:.75rem;margin-top:clamp(1.5rem,3.5vw,2.5rem);padding-top:1.25rem;border-top:1px solid var(--rule)}
+html:not(.js) .p-foot{display:none}
+
+/* galleries */
+.gallery{display:grid;gap:clamp(.75rem,2vw,1.25rem);margin-top:clamp(1.5rem,3.5vw,2.5rem)}
+.gallery.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gallery.three{grid-template-columns:repeat(3,minmax(0,1fr));max-width:54rem}
+.gallery figure{margin:0;display:grid;gap:.6rem;align-content:start}
+.gallery .postlink{font:500 .78rem/1.3 var(--mono);letter-spacing:.02em}
+.gallery figcaption{font-size:.82rem;line-height:1.45;color:var(--muted)}
+.zoom{display:block;width:100%;padding:0;border:1px solid var(--rule);border-radius:var(--radius);overflow:hidden;background:#fff;cursor:zoom-in;transition:transform .2s,box-shadow .2s,border-color .2s}
+.zoom img{display:block;width:100%;height:auto}
+.zoom:hover{transform:translateY(-3px);border-color:var(--ink);box-shadow:0 12px 28px -18px rgba(0,0,0,.5)}
+.lightbox{border:0;padding:0;background:transparent;max-width:min(94vw,1200px);max-height:94vh;color:#fff}
+.lightbox::backdrop{background:rgba(8,14,12,.86)}
+.lightbox img{display:block;max-width:100%;max-height:78vh;width:auto;height:auto;margin:0 auto;border-radius:8px;background:#fff}
+.lightbox p{margin:.8rem auto 0;max-width:60ch;text-align:center;font-size:.88rem;line-height:1.45;color:#e7eeea}
+.lightbox form{display:flex;justify-content:flex-end;margin-bottom:.6rem}
+.lightbox .copy{font-size:.8rem}
+@media (max-width:640px){.gallery.two{grid-template-columns:1fr}.gallery.three{grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem}.gallery.three figcaption{font-size:.72rem}}
+
+/* about */
+.about{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(1.5rem,4vw,3.5rem);align-items:start}
+.prose{display:grid;gap:1rem;max-width:62ch}
+.prose .lead{font-family:var(--display);font-size:clamp(1.7rem,3.4vw,2.5rem);line-height:1.15}
+.caps{list-style:none;margin:.9rem 0 0;padding:0;display:grid}
+.caps li{display:grid;grid-template-columns:2.2rem 1fr;gap:.5rem;padding:.85rem 0;border-top:1px solid var(--rule);line-height:1.4}
+.caps li small{display:block;margin-top:.2rem;color:var(--muted);font-size:.9rem;line-height:1.4}
+.caps li span{font-family:var(--mono);font-size:.78rem;color:var(--accent);padding-top:.2em}
+
+/* experience */
+.record{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(1.5rem,4vw,3.5rem);align-items:start}
+.timeline{list-style:none;margin:0;padding:0;display:grid}
+.timeline li{position:relative;display:grid;gap:.2rem;padding:0 0 1.75rem 2rem}
+.timeline li:last-child{padding-bottom:0}
+.timeline li::before{content:"";position:absolute;left:0;top:.45rem;width:.7rem;height:.7rem;border-radius:50%;background:var(--accent)}
+.timeline li::after{content:"";position:absolute;left:.33rem;top:1.3rem;bottom:.1rem;width:1px;background:var(--rule)}
+.timeline li:last-child::after{display:none}
+.timeline .when{font-family:var(--mono);font-size:.78rem;color:var(--accent);font-variant-numeric:tabular-nums}
+.timeline b{font-family:var(--display);font-weight:400;font-size:1.6rem;line-height:1.15}
+.timeline .roles{display:flex;flex-wrap:wrap;gap:.35rem .5rem;margin:.35rem 0;font-size:.85rem}
+.timeline .roles span{border:1px solid var(--rule);border-radius:999px;padding:.15rem .6rem;background:var(--sheet)}
+.timeline p{color:var(--muted);max-width:55ch}
+.edu{list-style:none;margin:.9rem 0 0;padding:0;display:grid}
+.edu li{display:grid;gap:.1rem;padding:.85rem 0;border-top:1px solid var(--rule)}
+.edu b{font-weight:600;line-height:1.35}
+.edu span{color:var(--muted);font-size:.9rem}
+
+/* contact */
+.contactbox{background:var(--ink);color:var(--paper);border-radius:calc(var(--radius) + 8px);padding:clamp(1.75rem,5vw,4.5rem);display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr);gap:clamp(1.5rem,4vw,3.5rem);align-items:center}
+.contactbox .label{color:color-mix(in srgb,var(--paper) 72%,transparent)}
+.contactbox h2{font-size:clamp(2.6rem,6vw,5rem);line-height:.95;margin-top:.9rem}
+.reach{list-style:none;margin:0;padding:0;display:grid;gap:.85rem}
+.reach .row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:1rem 1.15rem;padding:1.15rem 1.3rem;border:1px solid color-mix(in srgb,var(--paper) 24%,transparent);border-radius:var(--radius);transition:border-color .15s,background .15s}
+.reach .row:hover{border-color:color-mix(in srgb,var(--paper) 55%,transparent);background:color-mix(in srgb,var(--paper) 5%,transparent)}
+.reach .ico{width:2.9rem;height:2.9rem;border-radius:50%;display:grid;place-items:center;background:var(--mark);color:var(--mark-ink)}
+.reach .ico svg{display:block}
+.reach .meta{display:grid;gap:.25rem;min-width:0}
+.reach .meta a{color:var(--paper);font-size:clamp(1rem,1.5vw,1.12rem);line-height:1.35;overflow-wrap:anywhere}
+@media (max-width:560px){.reach .row{grid-template-columns:auto minmax(0,1fr)}.reach .row .copy{grid-column:2;justify-self:start}}
+.copy{font:500 .78rem/1 var(--mono);letter-spacing:.04em;background:var(--mark);color:var(--mark-ink);border:0;border-radius:999px;padding:.5rem .8rem;cursor:pointer}
+.copy:hover{filter:brightness(1.06)}
+footer{padding:1.5rem 0 2.5rem;font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem}
+
+@media (max-width:900px){
+  .hero,.p-top,.p-main,.about,.record,.contactbox{grid-template-columns:1fr}
+  .figures{grid-template-columns:repeat(2,1fr)}
+  .tabs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.4rem;margin-inline:calc(-1 * clamp(1rem,4vw,2.5rem));padding-inline:clamp(1rem,4vw,2.5rem)}
+  .tab{flex:0 0 11.5rem;scroll-snap-align:start}
+  .kpi{min-height:0}
+  .nav ul{display:none}
+  .ladder .row{grid-template-columns:1fr;gap:.4rem}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="name" href="#top">Teresa Castro</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#experience">Experience</a></li>
+    </ul>
+    <a class="btn" href="#contact">Get in touch</a>
+  </div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div>
+      <p class="label">Digital projects, content &amp; learning</p>
+      <h1 class="headword">Teresa <em>Castro</em></h1>
+      <p class="pron"><span>/tɨˈɾezɐ ˈkaʃtɾu/</span></p>
+      <ol class="senses">
+        <li><span>Senior Project and Content Manager who creates engaging digital experiences by bringing <mark>multilingual learning, data and editorial craft</mark> together.</span></li>
+      </ol>
+      <div class="cta">
+        <a class="btn" href="#about">About me</a>
+        <a class="btn ghost" href="#work">See selected work</a>
+      </div>
+    </div>
+    <aside class="card glancecard" aria-label="At a glance">
+      <span class="status"><i></i>Open to remote, part-time roles</span>
+      <dl>
+        <div><dt>Based in</dt><dd>Porto, Portugal</dd></div>
+        <div><dt>Languages</dt><dd>Portuguese (native), English C2, German C2, Spanish B2, French B1</dd></div>
+        <div><dt>Focus</dt><dd>Digital project and content management, e-learning, LMS</dd></div>
+      </dl>
+    </aside>
+  </div>
+  <div class="wrap">
+    <div class="figures">
+      <div><b>18+</b><span>years at Porto Editora, Portugal's leading publishing and EdTech group</span></div>
+      <div><b>48</b><span>websites and apps monitored for performance</span></div>
+      <div><b>7</b><span>digital launches led since 2019</span></div>
+      <div><b>21</b><span>courses localised for Angolan schools</span></div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="wrap about">
+      <div class="prose">
+        <span class="label">About</span>
+        <p class="lead">I make learning content work online.</p>
+        <p>I trained as an English and German teacher and went into publishing. I’ve worked for more than 18 years at Porto Editora, Portugal’s leading educational publisher, on platforms like <a href="https://www.escolavirtual.pt/">Escola Virtual</a> and <a href="https://www.infopedia.pt/">Infopédia</a>.</p>
+        <p>I started as a Content Manager, and in 7 years we added 9 new subjects. Then I led a team of 8 that built 21 courses for Angolan schools, in Angolan Portuguese, and 6 Portuguese-as-a-foreign-language courses. Since 2019 I’ve been Operations Manager: I monitor 48 websites and apps and have led 7 launches.</p>
+        <p>I’m used to coordinating people who work in different ways: authors who write on their own time, designers who need answers right away. I like work where content, data and people meet, like Infopédia × Netflix, where one post got more than 10,600 likes with no paid media.</p>
+      </div>
+      <div class="card">
+        <span class="label">What I do</span>
+        <ul class="caps">
+          <li><span>a.</span><div><a href="#bloco-grafico">Taking projects from brief to launch</a><small>Bloco Gráfico replaced an outdated site with a mobile-friendly one and a 360° virtual tour.</small></div></li>
+          <li><span>b.</span><div><a href="#escola-virtual-angola">Adapting e-learning to a new audience</a><small>21 courses for Angola, in Angolan Portuguese, with local voices.</small></div></li>
+          <li><span>c.</span><div><a href="#infopedia-netflix">Making content people share</a><small>Infopédia × Netflix: 10,600+ likes, no paid media.</small></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Selected work</span>
+        <h2>Five projects across learning, content and delivery</h2>
+        <p>Multilingual e-learning, interactive learning design, digital platforms and a social-first campaign. Pick a project to read its story.</p>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Projects">
+        <a class="tab" role="tab" id="t-infopedia-netflix" href="#infopedia-netflix" aria-controls="infopedia-netflix" aria-selected="true"><span class="n">01 · Campaign</span><span class="t">Infopédia × Netflix</span><span class="r">10,600+ organic likes</span></a>
+        <a class="tab" role="tab" id="t-escola-virtual-angola" href="#escola-virtual-angola" aria-controls="escola-virtual-angola" aria-selected="false"><span class="n">02 · E-learning</span><span class="t">Escola Virtual Angola</span><span class="r">21 courses localised</span></a>
+        <a class="tab" role="tab" id="t-bloco-grafico" href="#bloco-grafico" aria-controls="bloco-grafico" aria-selected="false"><span class="n">03 · Website</span><span class="t">Bloco Gráfico</span><span class="r">Launched January 2026</span></a>
+        <a class="tab" role="tab" id="t-portugues-mais-perto" href="#portugues-mais-perto" aria-controls="portugues-mais-perto" aria-selected="false"><span class="n">04 · E-learning</span><span class="t">Português Mais Perto</span><span class="r">6 courses, A1 to B2</span></a>
+        <a class="tab" role="tab" id="t-choose-your-path" href="#choose-your-path" aria-controls="choose-your-path" aria-selected="false"><span class="n">05 · Learning design</span><span class="t">Choose Your Path</span><span class="r">3rd place of 12 teams</span></a>
+      </div>
+
+      <!-- 01 -->
+      <article class="panel" role="tabpanel" id="infopedia-netflix" aria-labelledby="t-infopedia-netflix">
+        <div class="p-top">
+          <div>
+            <span class="label">01 · Social media collaboration · 2025</span>
+            <h3>Infopédia × Netflix: <i>The Wednesday the Dictionary Didn't See Coming</i></h3>
+            <ul class="chips"><li>Content &amp; partnerships</li><li>Instagram · TikTok · X</li><li>No paid media</li><li class="hit">Shortlist, Creativity Club Portugal Festival</li></ul>
+          </div>
+          <div class="kpi"><span class="label">Result</span><b>10,600+</b><span>organic likes on the main Instagram post, above its initial target</span></div>
+        </div>
+        <div class="gallery three"><figure><button type="button" class="zoom" data-full="img/netflix-entrada.jpg" aria-label="Enlarge image: Infopédia dictionary entry for quarta-feira with the new humorous sense and a Rabo de Peixe banner"><img src="img/netflix-entrada.jpg" width="460" height="616" alt="Infopédia dictionary entry for quarta-feira with the new humorous sense and a Rabo de Peixe banner" loading="lazy"></button><figcaption>Infopédia entry for ‘quarta-feira’, featured in the Netflix campaign. © Porto Editora</figcaption><a class="postlink" href="https://www.instagram.com/p/DPn57OwiD4y/">View post on Instagram ↗</a></figure><figure><button type="button" class="zoom" data-full="img/netflix-gentilicos.jpg" aria-label="Enlarge image: Social post asking what someone from Rabo de Peixe is called"><img src="img/netflix-gentilicos.jpg" width="460" height="619" alt="Social post asking what someone from Rabo de Peixe is called" loading="lazy"></button><figcaption>Infopédia asked “What do you call someone from Rabo de Peixe?” Netflix answered “We like to call them rapexinho.” © Porto Editora</figcaption><a class="postlink" href="https://www.instagram.com/p/DPgyq1elLv7/">View post on Instagram ↗</a></figure><figure><button type="button" class="zoom" data-full="img/netflix-acores.jpg" aria-label="Enlarge image: Carousel cover reading 5 typical words from the Azores"><img src="img/netflix-acores.jpg" width="465" height="622" alt="Carousel cover reading 5 typical words from the Azores" loading="lazy"></button><figcaption>A carousel celebrating the Azorean words and expressions featured in Rabo de Peixe. © Porto Editora</figcaption><a class="postlink" href="https://www.instagram.com/p/DP1Y7ltDwGt/">View post on Instagram ↗</a></figure></div>
+        <div class="p-main">
+          <div class="story"><div class="outcome"><h4>Outcome</h4><p>Infopédia updated its dictionary entry for “quarta-feira” (Wednesday) with a new meaning, turning the idea into a visible result. The campaign generated thousands of comments and was amplified by fans, cast members, influencers and brands.</p></div><details class="fold big"><summary>Challenge and approach</summary><div class="fold-body"><ol class="steps"><li><h4>Challenge</h4><p>Go beyond standard promotion for the new season of <i>Rabo de Peixe</i>: build anticipation, involve fans in the story, and turn their participation into a tangible update to Infopédia's dictionary.</p></li><li><h4>Approach</h4><p>A participatory, social-first campaign. A poll asked what residents of Rabo de Peixe are called, a carousel collected Azorean expressions from the series, and a challenge mobilised fans around the dictionary update. Showing the entry being updated live on video made the change feel immediate and shareable. The campaign culminated in a formal petition and a community celebration.</p></li></ol></div></details></div>
+          <div class="aside">
+            <div><span class="label">My role</span><p class="ink">From planning through content development and approvals, with the creative, social and partner teams.</p><p>Netflix wanted an update to the entry for “quarta-feira”. I proposed the live-update video, the poll and the carousel of Azorean words.</p></div>
+            <details class="fold"><summary>Context</summary><div class="fold-body"><p><a href="https://www.netflix.com/pt/title/81410976"><i>Rabo de Peixe</i></a> is a Netflix series set in the village of the same name, in the Azores. One of its characters, nicknamed “Quarta-feira” (Wednesday), gave the word a new meaning.</p></div></details>
+            <div><a class="btn ghost" href="https://www.oneclub.org/awards/ccp/-award/65795/a-quarta-feira-que-o-dicionrio-no-previu/">View the awards entry ↗</a><a class="btn ghost" href="https://www.infopedia.pt/">infopedia.pt ↗</a><small>Original content in Portuguese</small></div>
+          </div>
+        </div>
+        <div class="p-foot"><button class="btn ghost" disabled>← Previous</button><button class="btn" data-go="escola-virtual-angola">Next: Escola Virtual Angola →</button></div>
+      </article>
+
+      <!-- 02 -->
+      <article class="panel" role="tabpanel" id="escola-virtual-angola" aria-labelledby="t-escola-virtual-angola">
+        <div class="p-top">
+          <div>
+            <span class="label">02 · E-learning content localisation · 2019</span>
+            <h3>Escola Virtual Angola: localising e-learning for Angolan schools</h3>
+            <ul class="chips"><li>Team leadership &amp; project management</li><li>Team of 8</li><li>4 grade levels</li><li>Agile/Scrum</li></ul>
+          </div>
+          <div class="kpi"><span class="label">Result</span><b>21</b><span>courses delivered for 1st, 7th, 8th and 9th grades</span></div>
+        </div>
+        <div class="gallery two"><figure><button type="button" class="zoom" data-full="img/angola-portugues.jpg" aria-label="Enlarge image: Portuguese lesson on prefixes with puzzle pieces"><img src="img/angola-portugues.jpg" width="1024" height="574" alt="Portuguese lesson on prefixes with puzzle pieces" loading="lazy"></button><figcaption>Screenshot of a public demo lesson: Portuguese. © Porto Editora</figcaption></figure><figure><button type="button" class="zoom" data-full="img/angola-matematica.jpg" aria-label="Enlarge image: Mathematics lesson, a laboratory of geometric solids"><img src="img/angola-matematica.jpg" width="1329" height="745" alt="Mathematics lesson, a laboratory of geometric solids" loading="lazy"></button><figcaption>Screenshot of a public demo lesson: Mathematics. © Porto Editora</figcaption></figure></div>
+        <div class="p-main">
+          <div class="story"><div class="outcome"><h4>Outcome</h4><p>21 localised courses for Angolan schools, for 1st, 7th, 8th and 9th grades, plus a documented, repeatable workflow that shortened onboarding for new team members.</p></div><details class="fold big"><summary>Challenge and approach</summary><div class="fold-body"><ol class="steps"><li><h4>Challenge</h4><p>Deliver consistent, curriculum-based content across grades and subjects while coordinating authors working asynchronously with content managers and designers working in real time. The materials had to feel native to Angolan students, not translated or reused.</p></li><li><h4>Approach</h4><p>The key decision was to fully localise. Content was adapted to the Angolan curriculum and to Angolan Portuguese, written and spoken, and audio was re-recorded with Angolan speakers. I ran the lifecycle with Agile/Scrum planning and tracking, documented workflows for handoffs and onboarding, and ran quality checks before each release.</p></li></ol></div></details></div>
+          <div class="aside">
+            <div><span class="label">My role</span><p class="ink">Team Leader and Project Manager, from initiation to closure, coordinating authors, content managers and designers.</p></div>
+            <details class="fold"><summary>Context</summary><div class="fold-body"><p>Porto Editora's e-learning platform for the Angolan market. In 2019 Angola recorded about 6.4 million students in grades 1–9 (Ministry of Education of Angola / INE, Statistical Yearbook of Education 2019).</p></div></details>
+            <details class="fold"><summary>Skills</summary><div class="fold-body"><p>Content localisation, linguistic and curriculum adaptation, cross-functional coordination, process documentation, quality assurance.</p></div></details>
+            <div><a class="btn ghost" href="https://www.escolavirtual.co.ao/">escolavirtual.co.ao ↗</a><small>Portuguese, Angolan variant</small></div>
+          </div>
+        </div>
+        <div class="p-foot"><button class="btn ghost" data-go="infopedia-netflix">← Previous</button><button class="btn" data-go="bloco-grafico">Next: Bloco Gráfico →</button></div>
+      </article>
+
+      <!-- 03 -->
+      <article class="panel" role="tabpanel" id="bloco-grafico" aria-labelledby="t-bloco-grafico">
+        <div class="p-top">
+          <div>
+            <span class="label">03 · Corporate website rebuild · 2026</span>
+            <h3>Bloco Gráfico: replacing a legacy website</h3>
+            <ul class="chips"><li>Operations &amp; stakeholder lead</li><li>Sustainability section</li><li>360° virtual tour</li><li>Reported to the Board</li></ul>
+          </div>
+          <div class="kpi"><span class="label">Result</span><b>Jan 2026</b><span>launch of a mobile-friendly site that is easier to update</span></div>
+        </div>
+        <div class="gallery two"><figure><button type="button" class="zoom" data-full="img/bloco-sustentabilidade.jpg" aria-label="Enlarge image: Sustainability page with environmental figures"><img src="img/bloco-sustentabilidade.jpg" width="1400" height="719" alt="Sustainability page with environmental figures" loading="lazy"></button><figcaption>Bloco Gráfico’s sustainability page, showcasing its environmental commitment. © Porto Editora</figcaption></figure><figure><button type="button" class="zoom" data-full="img/bloco-visita360.jpg" aria-label="Enlarge image: Opening screen of the 360 degree virtual tour of the printing plant"><img src="img/bloco-visita360.jpg" width="1400" height="742" alt="Opening screen of the 360 degree virtual tour of the printing plant" loading="lazy"></button><figcaption>A 360° virtual tour of Bloco Gráfico’s printing facilities, showing how books are made. © Porto Editora</figcaption></figure></div>
+        <div class="p-main">
+          <div class="story"><div class="outcome"><h4>Outcome</h4><p>The new website of Bloco Gráfico, the printing unit of Grupo Porto Editora, has an interactive virtual tour that lets teachers and students see how books are made. It also has refreshed videos and a sustainability section covering environmental, social and governance commitments, organised around the ISO 14001-certified environmental management system.</p></div><details class="fold big"><summary>Challenge and approach</summary><div class="fold-body"><ol class="steps"><li><h4>Challenge</h4><p>The legacy site wasn't mobile-friendly, its design and videos were outdated, and it was hard to update. It had no sustainability section and didn't show the production facility in an engaging way. Replacing it required cross-department agreement and content approved by the owner of each area.</p></li><li><h4>Approach</h4><p>I translated business needs into a clear site structure and priorities, and brought departments together to agree what to publish and who owned each piece. Securing sustainability information took months of follow-up and, when needed, executive involvement to unblock delivery. I kept the project on schedule and monitored the site in Google Analytics after launch.</p></li></ol></div></details></div>
+          <div class="aside">
+            <div><span class="label">My role</span><p class="ink">Managed project operations from requirements through launch, aligned departments, and coordinated developers and designers.</p></div>
+            <details class="fold"><summary>Context</summary><div class="fold-body"><p>Bloco Gráfico, S.A. has been Grupo Porto Editora's printing and finishing division since 1944, based in Maia.</p><p>Its sustainability page reports a 22% lower carbon footprint (2021–2024), more than 90% of waste sent for recovery, and about 20% of energy produced for self-consumption (2024). These are the company’s results, not mine. My part was the website that shares them, and I’m proud to work for a company that does this.</p></div></details>
+            <details class="fold"><summary>Skills</summary><div class="fold-body"><p>Stakeholder management, content governance, sustainability communication, in-house CMS, Google Analytics.</p></div></details>
+            <div><a class="btn ghost" href="https://www.blocografico.pt/sustentabilidade">blocografico.pt ↗</a><small>Original content in Portuguese</small></div>
+          </div>
+        </div>
+        <div class="p-foot"><button class="btn ghost" data-go="escola-virtual-angola">← Previous</button><button class="btn" data-go="portugues-mais-perto">Next: Português Mais Perto →</button></div>
+      </article>
+
+      <!-- 04 -->
+      <article class="panel" role="tabpanel" id="portugues-mais-perto" aria-labelledby="t-portugues-mais-perto">
+        <div class="p-top">
+          <div>
+            <span class="label">04 · Portuguese as a foreign language · 2017–2018</span>
+            <h3>Português Mais Perto: courses for different levels and audiences</h3>
+            <ul class="chips"><li>Team leadership &amp; project management</li><li>Team of 8</li><li>Partnership with Camões, I.P.</li><li>CEFR A1–B2</li></ul>
+          </div>
+          <div class="kpi"><span class="label">Result</span><b>6</b><span>courses pairing proven material with new discovery-based grammar activities</span></div>
+        </div>
+        <div class="gallery two"><figure><button type="button" class="zoom" data-full="img/pmp-a1.jpg" aria-label="Enlarge image: Animated lesson for children about replacing nouns with pronouns"><img src="img/pmp-a1.jpg" width="1400" height="855" alt="Animated lesson for children about replacing nouns with pronouns" loading="lazy"></button><figcaption>Screenshot of a public demo lesson: A1 level, children. © Porto Editora</figcaption></figure><figure><button type="button" class="zoom" data-full="img/pmp-b2.jpg" aria-label="Enlarge image: Video lesson for adults on asking for directions, information and prices"><img src="img/pmp-b2.jpg" width="1400" height="863" alt="Video lesson for adults on asking for directions, information and prices" loading="lazy"></button><figcaption>Screenshot of a public demo lesson: B2 level, adults. © Porto Editora</figcaption></figure></div>
+        <div class="p-main">
+          <div class="story"><div class="outcome"><h4>Outcome</h4><p>Six courses of Portuguese as a foreign language: A1 and A2 for children and young people, A1 to B2 for adults. We built the first with Camões, I.P. and then extended to adult beginners on our own.</p></div><details class="fold big"><summary>Challenge and approach</summary><div class="fold-body"><ol class="steps"><li><h4>Challenge</h4><p>One set of courses for very different learners, from beginner to upper-intermediate, each matched to its level and audience. The courses had to go beyond explanatory videos and engage learners actively.</p></li><li><h4>Approach</h4><p>Combine reuse with targeted new creation. We reused material that already worked and created new activities where they added most, leading learners to discover the grammar rule themselves. Content was written by authors specialising in Portuguese as a foreign language and adapted to each CEFR level and age group.</p></li></ol></div></details></div>
+          <div class="aside">
+            <div><span class="label">My role</span><p class="ink">Team Leader and Project Manager, coordinating specialist authors, content managers and designers from initiation to closure.</p></div>
+            <details class="fold"><summary>Context</summary><div class="fold-body"><p>Porto Editora's platform for learners of Portuguese abroad. In 2017, 68,758 students were learning Portuguese in primary and secondary education abroad (Camões, I.P., reported by Lusa/DN, 21 September 2018).</p></div></details>
+            <details class="fold"><summary>Skills</summary><div class="fold-body"><p>Instructional design, pedagogical adaptation by level and audience, content curation and reuse, partnership management.</p></div></details>
+            <div><a class="btn ghost" href="https://www.portuguesmaisperto.pt/EN/Self-directed-learning/portugueseForeignLanguage.htm">portuguesmaisperto.pt ↗</a></div>
+          </div>
+        </div>
+        <figure class="visual">
+          <div class="ladder">
+            <div class="row"><span class="label">Children &amp; young people</span><div class="lv"><span class="y17">A1</span><span class="y17">A2</span><span class="none">B1</span><span class="none">B2</span></div></div>
+            <div class="row"><span class="label">Adults</span><div class="lv"><span>A1</span><span>A2</span><span class="y17">B1</span><span class="y17">B2</span></div></div>
+            <div class="legend"><span><i class="y17"></i>2017, in partnership with Camões, I.P.</span><span><i></i>2018, developed independently</span></div>
+          </div>
+          <figcaption>The six courses by audience and CEFR level.</figcaption>
+        </figure>
+        <div class="p-foot"><button class="btn ghost" data-go="bloco-grafico">← Previous</button><button class="btn" data-go="choose-your-path">Next: Choose Your Path →</button></div>
+      </article>
+
+      <!-- 05 -->
+      <article class="panel" role="tabpanel" id="choose-your-path" aria-labelledby="t-choose-your-path">
+        <div class="p-top">
+          <div>
+            <span class="label">05 · Story-led English-learning resource · 2010–2011</span>
+            <h3>Choose Your Path: a branching story for English learners</h3>
+            <ul class="chips"><li>Storyboard &amp; narrative</li><li>Interaction architecture</li><li>Development</li><li class="hit">Internal creativity contest</li></ul>
+          </div>
+          <div class="kpi"><span class="label">Result</span><b>3rd / 12</b><span>teams in Porto Editora's internal creativity contest</span></div>
+        </div>
+        <div class="gallery one"><figure><button type="button" class="zoom" data-full="img/choose-path.png" aria-label="Enlarge image: Diagram: a story scene leads to a choice, two paths rejoin, then a closing activity loops back for replay"><img src="img/choose-path.png" width="1400" height="782" alt="Diagram: a story scene leads to a choice, two paths rejoin, then a closing activity loops back for replay" loading="lazy"></button><figcaption>Illustrative interaction architecture: choices open different paths that later rejoin, while the experience integrates listening, reading, writing and speaking. Diagram created by the author; no original resource content is shown.</figcaption></figure></div>
+        <div class="p-main">
+          <div class="story"><div class="outcome"><h4>Outcome</h4><p>A non-linear resource for teaching English, developing listening, reading, writing and speaking. It is designed for replay: each choice is another path to explore, never a dead end.</p></div><details class="fold big"><summary>Challenge and approach</summary><div class="fold-body"><ol class="steps"><li><h4>Challenge</h4><p>An open brief, a fixed timeframe and 11 competing teams, judged on creativity, accuracy, educational value and technical execution. The idea had to raise the bar for interactivity and give learners a reason to come back.</p></li><li><h4>Approach</h4><p>A branching story in which each choice opens a different route. I mapped scenes, branches and the points where paths rejoin so every route stayed coherent, narratively and pedagogically. Drawing on my experience as an English teacher, I brought reading, listening, writing and speaking into one experience where learners work out language rules for themselves.</p></li></ol></div></details></div>
+          <div class="aside">
+            <div><span class="label">My role</span><p class="ink">Content Manager in a two-person team with a designer. I wrote the storyboard and narrative and built the branching architecture in the authoring tool.</p><p>I also commissioned a linguistic review by a native English speaker and supervised the voice recording for pronunciation, pacing and tone.</p></div>
+            <details class="fold"><summary>Skills</summary><div class="fold-body"><p>Narrative design, non-linear interaction architecture, instructional design, linguistic quality assurance.</p></div></details>
+            <div><small>The resource is internal and confidential, so it is not shown.</small></div>
+          </div>
+        </div>
+        <div class="p-foot"><button class="btn ghost" data-go="portugues-mais-perto">← Previous</button><a class="btn" href="#contact">Get in touch →</a></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Experience &amp; recognition</span>
+        <h2>Twenty years in publishing, most of them digital</h2>
+      </div>
+      <div class="record">
+        <ol class="timeline">
+          <li><span class="when">2025</span><b>Shortlist, Creativity Club Portugal Festival</b><p>Recognition for the Infopédia × Netflix campaign.</p></li>
+          <li><span class="when">2008 – present</span><b>Porto Editora</b>
+            <div class="roles"><span>Content Manager</span><span>Team Leader &amp; Project Manager</span><span>Operations Manager</span></div>
+            <p>I now monitor a portfolio of 48 websites and apps and have led seven digital launches since 2019.</p></li>
+          <li><span class="when">2005 – 2008</span><b>Civilização Editora</b>
+            <div class="roles"><span>Editorial Assistant</span></div>
+            <p>Edited, translated and typeset print publications.</p></li>
+        </ol>
+        <div class="card">
+          <span class="label">Education &amp; training</span>
+          <ul class="edu">
+            <li><b>Master’s Degree in Publishing</b><span>Instituto Universitario de Posgrado, Madrid, Spain</span></li>
+            <li><b>5-year degree (pre-Bologna) in English and German Languages and Literature (Education track)</b><span>Faculty of Arts and Humanities, University of Porto (FLUP), Portugal</span></li>
+            <li><b>Agile Project Management (Scrum &amp; Agile)</b><span>Radtac, 2018</span></li>
+            <li><b>Prompt Engineering: AI-Powered Prompt Writing</b><span>Udemy, 2023</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="contactbox">
+        <div>
+          <span class="label">Contact</span>
+          <h2>Get in touch</h2>
+        </div>
+        <ul class="reach">
+          <li class="row">
+            <span class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6.5L20.5 7"/></svg></span>
+            <div class="meta"><span class="label">Email</span><a href="mailto:teresa.a.castro@sapo.pt" id="email">teresa.a.castro@sapo.pt</a></div>
+            <button class="copy" id="copy" type="button">Copy</button>
+          </li>
+          <li class="row">
+            <span class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11.5H3V9.75Zm6.5 0h3.83v1.57h.06c.53-1.01 1.84-2.07 3.79-2.07 4.05 0 4.82 2.66 4.82 6.12v5.88h-4v-5.2c0-1.24-.02-2.84-1.73-2.84-1.73 0-2 1.35-2 2.75v5.29h-4V9.75Z"/></svg></span>
+            <div class="meta"><span class="label">LinkedIn</span><a href="https://www.linkedin.com/in/tacastro">linkedin.com/in/teresa-castro-content-project-manager</a></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>Teresa Castro · Porto, Portugal</span><a href="#top">Back to top ↑</a></div></footer>
+
+<dialog class="lightbox" id="lightbox" aria-label="Enlarged image">
+  <form method="dialog"><button class="copy" type="submit">Close ✕</button></form>
+  <img id="lb-img" alt="">
+  <p id="lb-cap"></p>
+</dialog>
+
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  var panels=[].slice.call(document.querySelectorAll('.panel'));
+  var ids=panels.map(function(p){return p.id});
+  function select(id,opts){
+    opts=opts||{};
+    if(ids.indexOf(id)<0) return false;
+    panels.forEach(function(p){p.hidden=p.id!==id});
+    tabs.forEach(function(t){
+      var on=t.getAttribute('aria-controls')===id;
+      t.setAttribute('aria-selected',on?'true':'false');
+      t.tabIndex=on?0:-1;
+      if(on && (opts.focus||opts.hash||opts.scroll)){ if(opts.focus) t.focus(); if(t.scrollIntoView) t.scrollIntoView({block:'nearest',inline:'nearest'}); }
+    });
+    if(opts.scroll) document.querySelector('.tabs').scrollIntoView();
+    if(opts.hash){try{history.replaceState(null,'','#'+id)}catch(e){}}
+    return true;
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(e){e.preventDefault();select(t.getAttribute('aria-controls'),{hash:true})});
+    t.addEventListener('keydown',function(e){
+      var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;
+      if(!d) return; e.preventDefault();
+      select(ids[(i+d+ids.length)%ids.length],{focus:true,hash:true});
+    });
+  });
+  document.querySelectorAll('[data-go]').forEach(function(b){
+    b.addEventListener('click',function(){select(b.getAttribute('data-go'),{scroll:true,hash:true})});
+  });
+  function fromHash(){var h=location.hash.slice(1); if(!select(h,{scroll:true}) && !document.querySelector('.panel:not([hidden])')) select(ids[0]);}
+  select(ids[0]); if(location.hash) fromHash();
+  window.addEventListener('hashchange',fromHash);
+
+  var bar=document.getElementById('progress');
+  function onScroll(){var d=document.documentElement,max=d.scrollHeight-d.clientHeight;bar.style.transform='scaleX('+(max>0?Math.min(1,d.scrollTop/max):0)+')'}
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+  var links=[].slice.call(document.querySelectorAll('.nav ul a'));
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){
+      if(en.isIntersecting) links.forEach(function(l){l.setAttribute('aria-current',l.getAttribute('href')==='#'+en.target.id?'true':'false')});
+    })},{rootMargin:'-45% 0px -50% 0px'});
+    document.querySelectorAll('main section[id]').forEach(function(s){io.observe(s)});
+  }
+
+  var lb=document.getElementById('lightbox'),lbi=document.getElementById('lb-img'),lbc=document.getElementById('lb-cap');
+  document.querySelectorAll('.zoom').forEach(function(z){z.addEventListener('click',function(){
+    var im=z.querySelector('img'); lbi.src=z.getAttribute('data-full'); lbi.alt=im.alt;
+    lbc.textContent=z.parentNode.querySelector('figcaption').textContent;
+    if(lb.showModal) lb.showModal(); else lb.setAttribute('open','');
+  })});
+  lb.addEventListener('click',function(e){if(e.target===lb) lb.close()});
+
+  var copy=document.getElementById('copy');
+  copy.addEventListener('click',function(){
+    var text=document.getElementById('email').textContent, done=function(ok){copy.textContent=ok?'Copied':'Select and copy';setTimeout(function(){copy.textContent='Copy'},1800)};
+    try{navigator.clipboard.writeText(text).then(function(){done(true)},function(){done(false)})}catch(e){done(false)}
+  });
+})();
+</script>
+</body>
+</html>
